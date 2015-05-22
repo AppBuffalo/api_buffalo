@@ -34,35 +34,6 @@ class UsersController < ApplicationController
       return_value json
   end
 
-  api :GET, '/users/:user_id/shows', "Return a list of shows tracked by a user."
-  param :user_id, :number, required: true, desc: "User's ID"
-  example '
-  {
-    "user_id": 2,
-    "shows": []
-  }'
-  def shows
-    shows = []
-    @user.shows.each do |s|
-      show = get_shows_infos_by_imdbid_omdb s.imdbid
-      puts show
-      shows.push( json_generate_show_ombd(show) )
-    end
-    return_value({ user_id: @user.id, shows: shows })
-  end
-
-  api :POST, '/users/:user_id/shows', "Add a show that a user want to track."
-  param :imdb_id, String, required: true, desc: "IMDB ID"
-  def add_show
-    if params[:imdb_id].nil?
-      imdb_id_null
-    elsif get_title_omdb(params[:imdb_id]).nil?
-      show_not_found
-    else
-      @user.shows.create(imdbid: params[:imdb_id])
-      show_added
-    end
-  end
 
   private
   def set_user
