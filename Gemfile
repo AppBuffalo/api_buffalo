@@ -36,3 +36,4 @@ gem 'imdb'
 #Divers
 gem 'puma'
 gem 'pry-rails'
+gem 'rack-cors', :require => 'rack/cors'
