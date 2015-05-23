@@ -21,7 +21,7 @@ group :development, :test do
 end
 
 #API Doc
-gem 'apipie-rails'
+gem 'apipie-rails', :github => 'Apipie/apipie-rails'
 
 #Wrappers
 gem 'nokogiri'

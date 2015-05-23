@@ -1,3 +1,10 @@
+GIT
+  remote: git://github.com/Apipie/apipie-rails.git
+  revision: f697ec2a887cd73c00c846eceb2ce63a050ccb20
+  specs:
+    apipie-rails (0.3.4)
+      json
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -45,8 +52,6 @@ GEM
       activerecord (>= 3.2, <= 4.3)
       rake (~> 10.4)
     api_cache (0.3.0)
-    apipie-rails (0.3.4)
-      json
     arel (6.0.0)
     better_errors (2.1.1)
       coderay (>= 1.0.0)
@@ -183,7 +188,7 @@ DEPENDENCIES
   airborne
   annotate
   api_cache
-  apipie-rails
+  apipie-rails!
   better_errors
   binding_of_caller
   database_cleaner

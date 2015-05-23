@@ -1,13 +1,13 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:shows, :add_show]
+  before_action :set_user, only: []
 
   api :GET, '/users', "Authentication method. Return User's id if found and nil if not."
-  param :device_type, String, required: true, desc: "Type of device (android or ios)"
-  param :device_id, :number, required: true, desc: "Device's unique ID"
+  param :email, String, required: true, desc: "User's email"
+  param :password, String, required: true, desc: "Users's password (sha3)"
   example "{id: 5}"
   def show
-    user = if params.include?(:device_id) && params.include?(:device_type) && !params[:device_id].nil? && !params[:device_type].nil?
-             User.where(device_id: params[:device_id]).where(device_type: params[:device_type])
+    user = if params.include?(:email) && params.include?(:password) && !params[:email].nil? && !params[:password].nil?
+             User.where(email: params[:email]).where(password: params[:password])
            else
              []
            end
