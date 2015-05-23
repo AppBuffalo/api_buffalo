@@ -16,16 +16,20 @@ class UsersController < ApplicationController
   end
 
   api :POST, '/users', "Create a new user and return his id. Return user's id if already registered."
+  param :email, String , required: true, desc: "User's email"
+  param :password, String, required: true, desc: "User's password"
   param :device_type, String, required: true, desc: "Type of device (android or ios)"
-  param :device_id, :number, required: true, desc: "Device's unique ID"
+  param :device_id, String, required: true, desc: "Device's unique ID"
   example "{id: 4}"
   def create
-    user = User.where(device_id: params[:device_id]).where(device_type: params[:device_type])
+    user = User.where(email: params[:email]).where(password: params[:password])
     json = if user.any?
              { id: user.first.id }
            else
-             if params.include?(:device_id) && params.include?(:device_type) && !params[:device_id].nil? && !params[:device_type].nil?
-               user = User.create(device_id: params[:device_id], device_type: params[:device_type])
+             if params.include?(:device_id) && params.include?(:device_type) && params.include?(:email) && params.include?(:password)
+                 !params[:device_id].nil? && !params[:device_type].nil? && !params[:email].nil? && !params[:password].nil?
+               user = User.create(device_id: params[:device_id], device_type: params[:device_type],
+                                  email: params[:email], password: params[:password])
                { id: user.id }
              else
                { id: nil }
