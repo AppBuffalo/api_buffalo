@@ -9,11 +9,14 @@
 #  updated_at  :timestamp withou not null
 #  device_id   :character varyin not null
 #  device_type :character varyin not null
+#  password    :character varyin
 #
 
 FactoryGirl.define do
   factory :user do
     device_type "android"
     device_id Random.rand(0..10000)
+    email "test@test.com"
+    password "password"
   end
 end
