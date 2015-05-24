@@ -7,4 +7,6 @@ Rails.application.routes.draw do
   get '/users',             to: 'users#show'
   post '/users',            to: 'users#create'
 
+  ### Photos ###
+  resources :photos
 end

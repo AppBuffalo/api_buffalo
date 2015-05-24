@@ -29,11 +29,10 @@ gem 'api_cache'
 
 #Apis
 gem 'httparty'
-gem 'omdb'
-gem 'tvdb_party'
-gem 'imdb'
+
 
 #Divers
+gem 'geocoder'
 gem 'puma'
 gem 'pry-rails'
 gem 'rack-cors', :require => 'rack/cors'
