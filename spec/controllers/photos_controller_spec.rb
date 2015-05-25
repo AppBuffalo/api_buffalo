@@ -13,7 +13,7 @@ RSpec.describe PhotosController, type: :controller do
     end
 
     it "should create a photo and return an id if all params are good" do
-      get 'create', { user_id: 1, s3_url: "url", lat: -5, long: 6 }
+      get 'create', { user_id: 1, s3_url: "url", lat: -5, long: 6, comment: "zamel" }
       expect(Photo.last.user_id).to eq(1)
       expect_json_types({ id: :integer })
     end
@@ -24,7 +24,7 @@ RSpec.describe PhotosController, type: :controller do
       photo = FactoryGirl.create(:photo)
       get 'show', { id: photo.id }
       expect_json({ id: photo.id, user_id: photo.user_id, latitude: photo.latitude,
-                    longitude: photo.longitude, s3_url: photo.s3_url })
+                    longitude: photo.longitude, s3_url: photo.s3_url, comment: photo.comment, score: photo.score })
     end
   end
 end

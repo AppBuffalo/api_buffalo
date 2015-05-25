@@ -15,7 +15,7 @@ RSpec.describe UsersController, type: :controller do
     it "should return an id if user exists" do
       user = FactoryGirl.create(:user)
       get 'show', { device_type: user.device_type, device_id: user.device_id }
-      expect_json({ id: user.id })
+      expect_json({ id: user.id, score: user.score })
     end
   end
 

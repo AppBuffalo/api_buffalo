@@ -4,8 +4,10 @@ Rails.application.routes.draw do
   root 'apipie/apipies#index'
 
   ### Users ###
-  get '/users',             to: 'users#show'
-  post '/users',            to: 'users#create'
+  post '/users/:user_id/like/:photo_id',    to: 'users#like'
+  post '/users/:user_id/dislike/:photo_id', to: 'users#dislike'
+  get '/users',                             to: 'users#show'
+  post '/users',                            to: 'users#create'
 
   ### Photos ###
   resources :photos

@@ -9,6 +9,8 @@
 #  s3_url     :character varyin
 #  created_at :timestamp withou not null
 #  updated_at :timestamp withou not null
+#  comment    :character varyin
+#  score      :integer          default(0)
 #
 
 class Photo < ActiveRecord::Base
@@ -16,6 +18,8 @@ class Photo < ActiveRecord::Base
 
   reverse_geocoded_by :latitude, :longitude
   after_validation :reverse_geocode
+
+  acts_as_votable
 
   def reverse_geocode
   end

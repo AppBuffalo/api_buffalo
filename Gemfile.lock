@@ -43,6 +43,7 @@ GEM
       minitest (~> 5.1)
       thread_safe (~> 0.3, >= 0.3.4)
       tzinfo (~> 1.1)
+    acts_as_votable (0.10.0)
     airborne (0.1.15)
       activesupport (>= 3.0.0)
       rack-test (~> 0.6, >= 0.6.2)
@@ -180,6 +181,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  acts_as_votable (~> 0.10.0)
   airborne
   annotate
   api_cache

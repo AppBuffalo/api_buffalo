@@ -10,6 +10,7 @@
 #  device_id   :character varyin not null
 #  device_type :character varyin not null
 #  password    :character varyin
+#  score       :integer          default(0)
 #
 
 FactoryGirl.define do
@@ -18,5 +19,6 @@ FactoryGirl.define do
     device_id Random.rand(0..10000)
     email "test@test.com"
     password "password"
+    score 5
   end
 end

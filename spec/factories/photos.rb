@@ -9,6 +9,8 @@
 #  s3_url     :character varyin
 #  created_at :timestamp withou not null
 #  updated_at :timestamp withou not null
+#  comment    :character varyin
+#  score      :integer          default(0)
 #
 
 FactoryGirl.define do
@@ -17,5 +19,7 @@ FactoryGirl.define do
     latitude 1.5
     longitude 1.5
     s3_url "s3_test"
+    score 5
+    comment "bop"
   end
 end
