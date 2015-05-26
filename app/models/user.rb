@@ -17,4 +17,8 @@ class User < ActiveRecord::Base
   has_many :photos
 
   acts_as_voter
+
+  def photo_size
+    self.photos.size
+  end
 end

@@ -1,16 +1,16 @@
 class UsersController < ApplicationController
 
-  api :GET, '/users', "Authentication method. Return User's id if found and nil if not."
+  api :GET, '/users', "Authentication method. Return User's id if found (nil if not), user's total score and user's total number of photos send."
   param :device_type, String, required: true, desc: "User's device type (android or ios)"
   param :device_id, String, required: true, desc: "Users's unique device id"
-  example "{id: 5, score: 56}"
+  example "{id: 5, score: 56, photo_size: 3}"
   def show
     user = if params.include?(:device_type) && params.include?(:device_id) && !params[:device_type].nil? && !params[:device_type].nil?
              User.where(device_type: params[:device_type]).where(device_id: params[:device_id])
            else
              []
            end
-    json = user.any? ? { id: user.first.id, score: user.first.score } : { id: nil }
+    json = user.any? ? { id: user.first.id, score: user.first.score, photo_size: user.first.photo_size } : { id: nil }
     return_value json
   end
 
