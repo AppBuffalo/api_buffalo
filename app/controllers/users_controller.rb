@@ -10,7 +10,7 @@ class UsersController < ApplicationController
            else
              []
            end
-    json = user.any? ? { id: user.first.id, score: user.first.score, photo_size: user.first.photo_size } : { id: nil }
+    json = user.any? ? { id: user.first.id, score: user.first.get_score, photo_size: user.first.photo_size } : { id: nil }
     return_value json
   end
 

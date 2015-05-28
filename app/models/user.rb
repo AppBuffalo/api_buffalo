@@ -21,4 +21,8 @@ class User < ActiveRecord::Base
   def photo_size
     self.photos.size
   end
+
+  def get_score
+    self.score < 0 ? 0 : self.score
+  end
 end
