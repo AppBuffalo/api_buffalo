@@ -85,7 +85,7 @@ class PhotosController < ApplicationController
                       else
                         Photo.where.not(user_id: params[:user_id])
                             .near([params[:latitude], params[:longitude]])
-                            .limit(10).offset(params[:page] * 10)
+                            .limit(10)
                             .order('id desc')
                       end
 
