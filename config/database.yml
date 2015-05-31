@@ -23,10 +23,7 @@ default: &default
 
 development:
   <<: *default
-  database: plottwist_dev
-  username: tgeselle
-  password:
-
+  url: postgres://rnyruppmsrevqd:kkKoPVdhEV781vy4_hPmXzbCXu@ec2-54-247-79-142.eu-west-1.compute.amazonaws.com:5432/d2kh6sqot1tmuo
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
   # When left blank, postgres will use the default role. This is

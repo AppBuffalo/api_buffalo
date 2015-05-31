@@ -23,4 +23,8 @@ class Photo < ActiveRecord::Base
 
   def reverse_geocode
   end
+
+  def get_score
+    self.score < 0 ? 0 : self.score
+  end
 end

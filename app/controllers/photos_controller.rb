@@ -77,21 +77,22 @@ class PhotosController < ApplicationController
              if user.nil?
                []
              else
-               temp = if params.include?(:page) && !params[:page].nil?
-                        Photo.where.not(user_id: params[:user_id])
-                            .near([params[:latitude], params[:longitude]])
-                            .limit(10).offset(params[:page] * 10)
-                            .order('id desc')
-                      else
-                        Photo.where.not(user_id: params[:user_id])
-                            .near([params[:latitude], params[:longitude]])
-                            .limit(10)
-                            .order('id desc')
-                      end
+               photos = Photo.where.not(user_id: params[:user_id])
+                  .where.not(id: user.find_voted_items.map(&:id))
+                  .near([params[:latitude], params[:longitude]])
+                  .limit(1)
+                  .order('RANDOM()')
 
-               photos = []
-               temp.each{|p| photos.push(p) unless user.voted_for?(p)}
-               photos.to_json
+               if photos.nil?
+                 []
+               else
+                 [{
+                     id: photos.first.id,
+                     s3_url: photos.first.s3_url,
+                     score: photos.first.get_score,
+                     comment: photos.first.comment
+                 }]
+               end
              end
            else
              []
