@@ -52,7 +52,7 @@ class PhotosController < ApplicationController
   param :latitude, Float, required: true, desc: "User's latitude"
   param :longitude, Float, required: true, desc: "User's longitude"
   param :user_id, Integer, required: true, desc: "User's id"
-  param :page, Integer, required: false, desc: "Pagination's page."
+  param :size, Integer, required: false, desc: "Number of image to retrieve"
   example '[
     {
         "id": 1,
@@ -69,6 +69,8 @@ class PhotosController < ApplicationController
     },{...}
 ]'
   def index
+    params[:size] ||= 1
+
     json = if params.include?(:user_id) && params.include?(:latitude) && params.include?(:longitude) &&
               !params[:user_id].nil? && !params[:latitude].nil? && !params[:longitude].nil?
 
@@ -80,18 +82,22 @@ class PhotosController < ApplicationController
                photos = Photo.where.not(user_id: params[:user_id])
                   .where.not(id: user.find_voted_items.map(&:id))
                   .near([params[:latitude], params[:longitude]])
-                  .limit(1)
+                  .limit(params[:size])
                   .order('RANDOM()')
 
                if photos.nil?
                  []
                else
-                 [{
-                     id: photos.first.id,
-                     s3_url: photos.first.s3_url,
-                     score: photos.first.get_score,
-                     comment: photos.first.comment
-                 }]
+                 temp = []
+                 photos.each do |p|
+                   temp.push({
+                      id: p.id,
+                      s3_url: p.s3_url,
+                      score: p.get_score,
+                      comment: p.comment
+                    })
+                 end
+                 temp
                end
              end
            else
