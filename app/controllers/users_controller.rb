@@ -48,7 +48,9 @@ class UsersController < ApplicationController
       else
         photo.liked_by user
         photo.user.score += 1
+        photo.score += 1
         photo.user.save
+        photo.save
         json = { success: true }
       end
     else
@@ -73,9 +75,11 @@ class UsersController < ApplicationController
         photo.downvote_from user
 
         photo.user.score -= 1
+        photo.score -= 1
         photo.user.save
+        photo.save
 
-        photo.destroy if photo.score < -20
+        photo.destroy if photo.score <= -5
 
         json = { success: true }
       end
