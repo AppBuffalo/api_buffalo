@@ -39,7 +39,7 @@ class PhotosController < ApplicationController
                    longitude: photo.longitude,
                    s3_url: photo.s3_url,
                    comment: photo.comment,
-                   score: photo.get_likes.size
+                   score: photo.get_score
                }
              end
            else
@@ -76,7 +76,6 @@ class PhotosController < ApplicationController
                   .where.not(id: user.find_voted_items.map(&:id))
                   .near([params[:latitude], params[:longitude]])
                   .limit(params[:size])
-                  .order('RANDOM()')
 
                if photos.nil?
                  []
