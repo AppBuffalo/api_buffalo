@@ -25,6 +25,7 @@ class Photo < ActiveRecord::Base
   end
 
   def get_score
-    self.score < 0 ? 0 : self.score
+    score = self.get_likes.size - self.get_dislikes.size
+    score < 0 ? 0 : score
   end
 end

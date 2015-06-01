@@ -56,14 +56,7 @@ class PhotosController < ApplicationController
   example '[
     {
         "id": 1,
-        "user_id": 2,
-        "latitude": 5,
-        "longitude": -4.5,
         "s3_url": "http:/ssdfsf",
-        "created_at": "2015-05-24T14:26:42.486Z",
-        "updated_at": "2015-05-24T14:26:42.486Z",
-        "distance": 0,
-        "bearing": "0.0",
         "score": 56,
         "comment": "zamel"
     },{...}
