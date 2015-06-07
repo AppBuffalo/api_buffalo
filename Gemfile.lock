@@ -61,6 +61,7 @@ GEM
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
     builder (3.2.2)
+    chronic (0.10.2)
     coderay (1.1.0)
     database_cleaner (1.4.1)
     debug_inspector (0.0.2)
@@ -176,6 +177,8 @@ GEM
     unf (0.1.4)
       unf_ext
     unf_ext (0.0.7.1)
+    whenever (0.9.4)
+      chronic (>= 0.6.3)
 
 PLATFORMS
   ruby
@@ -201,3 +204,4 @@ DEPENDENCIES
   rails-api
   rspec-rails
   spring
+  whenever
