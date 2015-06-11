@@ -6,13 +6,18 @@ class PhotosController < ApplicationController
   param :long, Float, required: true, desc: "Photo's longitude"
   param :s3_url, String, required: true, desc: "Photo's S3 URL"
   param :comment, String, required: true, desc: "Photo's comment"
+  param :comment_position, Integer, required: false, desc: "Comment Y position"
   example "{id: 23}"
   def create
     json = if params.include?(:user_id) && params.include?(:lat) && params.include?(:long) && params.include?(:s3_url) &&
               params.include?(:comment) && !params[:user_id].nil? && !params[:lat].nil? && !params[:long].nil? &&
               !params[:s3_url].nil? && !params[:comment].nil?
+
+             params[:comment_position] ||= nil
+
              if photo = Photo.create(user_id: params[:user_id], latitude: params[:lat],
-                                     longitude: params[:long], s3_url: params[:s3_url], comment: params[:comment])
+                                     longitude: params[:long], s3_url: params[:s3_url], comment: params[:comment],
+                                     comment_position: params[:comment_position])
                { id: photo.id }
              else
                { id: nil }
@@ -25,7 +30,7 @@ class PhotosController < ApplicationController
 
   api :GET, '/photos/:id', "Return photo's infos."
   param :id, Integer, required: true, desc: "Photo's id"
-  example "{id: 5, user_id: 12, latitude: -5.2, longitude: 5.65, s3_url: 'http://s3.com/photo.png', comment: 'Zamel', score: 5}"
+  example "{id: 5, user_id: 12, latitude: -5.2, longitude: 5.65, s3_url: 'http://s3.com/photo.png', comment: 'Zamel', comment_position: 5, score: 5}"
   def show
     json = if params.include?(:id) && !params[:id].nil?
              photo = Photo.find_by_id(params[:id])
@@ -39,6 +44,7 @@ class PhotosController < ApplicationController
                    longitude: photo.longitude,
                    s3_url: photo.s3_url,
                    comment: photo.comment,
+                   comment_position: photo.comment_position,
                    score: photo.get_score
                }
              end
@@ -58,7 +64,8 @@ class PhotosController < ApplicationController
         "id": 1,
         "s3_url": "http:/ssdfsf",
         "score": 56,
-        "comment": "zamel"
+        "comment": "zamel",
+        "comment_position": 134
     },{...}
 ]'
   def index
@@ -86,7 +93,8 @@ class PhotosController < ApplicationController
                       id: p.id,
                       s3_url: p.s3_url,
                       score: p.get_score,
-                      comment: p.comment
+                      comment: p.comment,
+                      comment_position: p.comment_position
                     })
                  end
                  temp

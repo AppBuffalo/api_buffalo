@@ -11,32 +11,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150525180111) do
+ActiveRecord::Schema.define(version: 20150611121846) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-  create_table "marks", id: false, force: :cascade do |t|
-    t.integer  "marker_id"
-    t.string   "marker_type"
-    t.integer  "markable_id"
-    t.string   "markable_type"
-    t.string   "mark",          limit: 128
-    t.datetime "created_at",                precision: 6
-  end
-
-  add_index "marks", ["markable_id", "markable_type", "mark"], name: "index_marks_on_markable_id_and_markable_type_and_mark", using: :btree
-  add_index "marks", ["marker_id", "marker_type", "mark"], name: "index_marks_on_marker_id_and_marker_type_and_mark", using: :btree
 
   create_table "photos", force: :cascade do |t|
     t.integer  "user_id"
     t.float    "latitude"
     t.float    "longitude"
     t.string   "s3_url"
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
     t.string   "comment"
-    t.integer  "score",      default: 0
+    t.integer  "score",            default: 0
+    t.integer  "comment_position"
   end
 
   create_table "users", force: :cascade do |t|

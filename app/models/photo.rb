@@ -2,15 +2,16 @@
 #
 # Table name: photos
 #
-#  id         :integer          not null, primary key
-#  user_id    :integer
-#  latitude   :double precision
-#  longitude  :double precision
-#  s3_url     :character varyin
-#  created_at :timestamp withou not null
-#  updated_at :timestamp withou not null
-#  comment    :character varyin
-#  score      :integer          default(0)
+#  id               :integer          not null, primary key
+#  user_id          :integer
+#  latitude         :double precision
+#  longitude        :double precision
+#  s3_url           :character varyin
+#  created_at       :timestamp withou not null
+#  updated_at       :timestamp withou not null
+#  comment          :character varyin
+#  score            :integer          default(0)
+#  comment_position :integer
 #
 
 class Photo < ActiveRecord::Base
